@@ -1,3 +1,25 @@
 venv
 requirements.txt
 .qodo
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+
+
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Virtual Environments
+venv/
+env/
+ENV/
+
+# VS Code
+.vscode/
+
+# Environment variables
+.env
+data
