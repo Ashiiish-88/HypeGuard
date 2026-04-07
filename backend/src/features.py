@@ -25,8 +25,8 @@ logger = logging.getLogger(__name__)
 # ─────────────────────────────────────────────
 
 VOLUME_LOOKBACK_DAYS    = 20       # days for rolling volume average
-RVOL_SPIKE_THRESHOLD    = 2.5     # RVOL above this = anomaly
-ZSCORE_SPIKE_THRESHOLD  = 2.0     # Z-score above this = anomaly
+RVOL_SPIKE_THRESHOLD    = 1.8     # RVOL above this = anomaly
+ZSCORE_SPIKE_THRESHOLD  = 1.5     # Z-score above this = anomaly
 RSI_PERIOD              = 14
 RSI_OVERBOUGHT          = 75
 BOLLINGER_PERIOD        = 20
