@@ -29,7 +29,11 @@ REQUEST_DELAY_SECONDS = 1.5  # polite delay between requests
 # PRICE & VOLUME DATA
 # ─────────────────────────────────────────────
 
-def fetch_price_data(ticker: str, days: int = DEFAULT_LOOKBACK_DAYS) -> pd.DataFrame:
+def fetch_price_data(
+    ticker: str,
+    days: int = DEFAULT_LOOKBACK_DAYS,
+    end_date: Optional[datetime] = None,
+) -> pd.DataFrame:
     """
     Fetches OHLCV data from Yahoo Finance via yfinance.
 
@@ -42,13 +46,15 @@ def fetch_price_data(ticker: str, days: int = DEFAULT_LOOKBACK_DAYS) -> pd.DataF
         Returns empty DataFrame on failure.
     """
     try:
-        end_date = datetime.today()
-        start_date = end_date - timedelta(days=days)
+        end_dt = end_date or datetime.today()
+        start_date = end_dt - timedelta(days=days)
 
-        logger.info(f"Fetching price data for {ticker} ({days} days)...")
+        logger.info(
+            f"Fetching price data for {ticker} ({days} days, end={end_dt.strftime('%Y-%m-%d')})..."
+        )
         ticker_obj = yf.Ticker(ticker)
         df = ticker_obj.history(start=start_date.strftime("%Y-%m-%d"),
-                                end=end_date.strftime("%Y-%m-%d"))
+                                end=end_dt.strftime("%Y-%m-%d"))
 
         if df.empty:
             logger.warning(f"No price data returned for {ticker}. Check ticker symbol.")
@@ -77,12 +83,34 @@ def fetch_earnings_dates(ticker: str) -> list[str]:
         ticker_obj = yf.Ticker(ticker)
         cal = ticker_obj.calendar
 
+        def _normalize_date(value) -> str:
+            if value is None:
+                return ""
+            try:
+                ts = pd.to_datetime(value, errors="coerce")
+                if pd.notna(ts):
+                    return str(ts.date())
+            except Exception:
+                pass
+            text = str(value).strip()
+            return text[:10] if text else ""
+
         dates = []
-        if cal is not None and not cal.empty:
+        if isinstance(cal, pd.DataFrame) and not cal.empty:
             for col in cal.columns:
-                val = cal[col].iloc[0]
-                if pd.notna(val):
-                    dates.append(str(val)[:10])
+                normalized = _normalize_date(cal[col].iloc[0])
+                if normalized:
+                    dates.append(normalized)
+        elif isinstance(cal, pd.Series) and not cal.empty:
+            for val in cal.values:
+                normalized = _normalize_date(val)
+                if normalized:
+                    dates.append(normalized)
+        elif isinstance(cal, dict):
+            for val in cal.values():
+                normalized = _normalize_date(val)
+                if normalized:
+                    dates.append(normalized)
 
         logger.info(f"  ✓ Earnings dates for {ticker}: {dates}")
         return dates
@@ -143,7 +171,11 @@ def fetch_news(ticker: str, max_articles: int = 30) -> list[dict]:
 # MASTER FETCH — single entry point
 # ─────────────────────────────────────────────
 
-def collect_all(ticker: str, days: int = DEFAULT_LOOKBACK_DAYS) -> dict:
+def collect_all(
+    ticker: str,
+    days: int = DEFAULT_LOOKBACK_DAYS,
+    end_date: Optional[datetime] = None,
+) -> dict:
     """
     Master function: fetches all data for a given ticker.
     Safe to call — never raises exceptions, always returns dict.
@@ -163,7 +195,7 @@ def collect_all(ticker: str, days: int = DEFAULT_LOOKBACK_DAYS) -> dict:
     logger.info(f"  HypeGuard Data Collection: {ticker}")
     logger.info(f"{'='*50}")
 
-    price_df       = fetch_price_data(ticker, days)
+    price_df       = fetch_price_data(ticker, days=days, end_date=end_date)
     news           = fetch_news(ticker)
     earnings_dates = fetch_earnings_dates(ticker)
 
