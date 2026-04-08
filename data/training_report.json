@@ -1,0 +1,22 @@
+{
+  "seed": 42,
+  "test_size": 0.2,
+  "rows_total": 6540,
+  "rows_train": 5232,
+  "rows_val": 1308,
+  "class_counts_total": {
+    "NEUTRAL": 5419,
+    "ORGANIC": 781,
+    "HYPE": 340
+  },
+  "class_counts_train": {
+    "NEUTRAL": 4335,
+    "ORGANIC": 625,
+    "HYPE": 272
+  },
+  "class_counts_val": {
+    "NEUTRAL": 1084,
+    "ORGANIC": 156,
+    "HYPE": 68
+  }
+}
