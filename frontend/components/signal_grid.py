@@ -1,5 +1,5 @@
 import streamlit as st
-from frontend.lib.theme import get_hype_color
+from lib.theme import get_hype_color
 
 
 def _badge(text: str, color: str):

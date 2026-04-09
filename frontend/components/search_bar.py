@@ -1,11 +1,5 @@
 import streamlit as st
-from state.analyze_state import analyze, load_demo
-
-DEMO_TICKERS = [
-    {"ticker": "GME", "label": "🎮 GME - Classic Pump"},
-    {"ticker": "NVDA", "label": "🤖 NVDA - Organic Growth"},
-    {"ticker": "AMC", "label": "🎬 AMC - Meme Hype"},
-]
+from state.analyze_state import analyze
 
 
 def render_search_bar():
@@ -14,9 +8,12 @@ def render_search_bar():
     with col1:
         ticker = st.text_input("Ticker", value="", max_chars=5, placeholder="GME").upper().strip()
     with col2:
-        amount = st.number_input("Amount", min_value=1.0, value=5000.0, step=100.0)
+        amount = st.number_input("Amount", min_value=1.0, value=float(st.session_state.get("amount", 5000.0)), step=100.0)
     with col3:
-        currency = st.radio("Currency", options=["INR", "USD"], horizontal=True)
+        currency = st.radio("Currency", options=["INR", "USD"], horizontal=True, index=0 if st.session_state.get("currency", "INR") == "INR" else 1)
+
+    st.session_state.amount = float(amount)
+    st.session_state.currency = str(currency)
 
     btn_col1, btn_col2 = st.columns([1, 1])
     with btn_col1:
@@ -27,10 +24,3 @@ def render_search_bar():
                 st.warning("Enter a ticker first.")
     with btn_col2:
         st.write(" ")
-
-    # Demo buttons
-    demo_cols = st.columns(len(DEMO_TICKERS))
-    for c, demo in zip(demo_cols, DEMO_TICKERS):
-        with c:
-            if st.button(demo["label"]):
-                load_demo(demo["ticker"]) 

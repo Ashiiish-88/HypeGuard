@@ -1,5 +1,5 @@
 import streamlit as st
-from frontend.lib.theme import ACTION_CONFIG, get_hype_color
+from lib.theme import ACTION_CONFIG, get_hype_color
 
 
 def render_investment_advice(data: dict, currency: str):
