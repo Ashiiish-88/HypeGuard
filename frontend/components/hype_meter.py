@@ -1,6 +1,6 @@
 import streamlit as st
 import plotly.graph_objects as go
-from frontend.lib.theme import LABEL_CONFIG, get_hype_color
+from lib.theme import LABEL_CONFIG, get_hype_color
 
 
 def render_hype_meter(data: dict, loading: bool):
@@ -11,7 +11,7 @@ def render_hype_meter(data: dict, loading: bool):
         return
 
     if not data:
-        st.info("No analysis yet. Enter ticker and run Analyze or pick a demo.")
+        st.info("No analysis yet. Enter a ticker and click Analyze or use a quick ticker button.")
         return
 
     hype = float(data.get("hype_score", 0.0))

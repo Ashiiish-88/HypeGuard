@@ -1,5 +1,5 @@
 import streamlit as st
-from frontend.lib.theme import LABEL_CONFIG
+from lib.theme import LABEL_CONFIG
 
 
 def render_reasoning_box(data: dict):

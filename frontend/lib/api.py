@@ -17,10 +17,3 @@ def analyze_stock(ticker: str, amount: float, currency: str) -> dict:
             err = {}
         raise RuntimeError(err.get("detail", "Analysis failed"))
     return res.json()
-
-
-def fetch_demo(ticker: str) -> dict:
-    res = requests.get(f"{BASE}/demo/{ticker.upper()}", timeout=30)
-    if res.status_code >= 400:
-        raise RuntimeError("Demo data unavailable")
-    return res.json()

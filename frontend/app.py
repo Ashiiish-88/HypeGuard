@@ -19,7 +19,7 @@ st.caption("Detect artificial stock volatility before it costs you money.")
 # 1) SearchBar
 render_search_bar()
 
-# 2) DemoButtons (redundant but allowed)
+# 2) Quick ticker buttons
 render_demo_buttons()
 
 # Error
