@@ -1,0 +1,26 @@
+# Install after requirements.txt:
+#   pip install -r requirements.txt
+#   pip install -r requirements-ml.txt
+#
+# CPU-only PyTorch (saves ~2 GB vs CUDA build — sufficient for laptop/Colab T4):
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# Or just:
+#   pip install torch
+
+# ── Deep Learning ──────────────────────────────────────────────────────
+torch>=2.2.0
+transformers>=4.40.0      # HuggingFace — FinBERT (ProsusAI/finbert)
+onnx>=1.16.0              # Model serialization & graph export
+onnxruntime>=1.18.0       # CPU inference for exported ONNX model
+onnxscript>=0.7.0         # PyTorch ONNX export engine
+sentencepiece>=0.1.99     # tokenizer dependency for some HF models
+
+# ── Hyperparameter Tuning ──────────────────────────────────────────────
+optuna>=3.6.0
+
+# ── Data storage ───────────────────────────────────────────────────────
+pyarrow>=15.0.0           # parquet read/write for data stores
+fastparquet>=2024.2.0
+
+# ── Extra utilities ────────────────────────────────────────────────────
+tqdm>=4.66.0

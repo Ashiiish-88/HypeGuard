@@ -1,0 +1,50 @@
+name: HypeGuard CI
+
+on:
+  push:
+    branches: [main, dev, "phase/*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements*.txt') }}
+
+      - name: Install runtime deps
+        run: pip install -r requirements.txt
+
+      - name: Install dev deps
+        run: pip install -r requirements-dev.txt
+
+      - name: Lint with ruff
+        run: ruff check backend/src scripts --output-format=github
+        continue-on-error: true   # non-blocking until codebase is clean
+
+      - name: Run unit tests (no network)
+        run: |
+          cd backend
+          python -m pytest tests/ -v -m "not network" --tb=short --junitxml=test-results.xml
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.python-version }}
+          path: backend/test-results.xml

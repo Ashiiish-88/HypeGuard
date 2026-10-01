@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# VS Code
+.vscode/
+
+# Qodo
+.qodo/
+
+# Environment variables
+.env
+
+# Model binaries (too large for git — regenerate via scripts/regenerate_baselines.py)
+backend/models/*.pkl
+backend/models/*.onnx
+models/*.pkl
+models/*.onnx
+
+# Data directories (generated — too large for git)
+data/raw/
+data/processed/
+data/cache/
+backend/data/cache/
+
+# Training runs / outputs
+runs/
+reports/figures/
+
+# OS
+.DS_Store
+Thumbs.db

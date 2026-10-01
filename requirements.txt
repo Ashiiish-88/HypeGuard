@@ -1,0 +1,21 @@
+# ── Core Data ──────────────────────────────────────────────────────────
+yfinance>=0.2.40          # Yahoo Finance OHLCV data (no API key needed)
+feedparser>=6.0.11        # Google News RSS scraping (no API key needed)
+pandas>=2.0.0
+numpy>=1.26.0
+requests>=2.31.0
+
+# ── Config ─────────────────────────────────────────────────────────────
+pydantic-settings>=2.0.0  # Central config management
+python-dotenv>=1.0.0
+
+# ── ML / Feature Engineering ───────────────────────────────────────────
+scikit-learn>=1.4.0       # Isolation Forest, Random Forest, preprocessing
+
+# ── API ────────────────────────────────────────────────────────────────
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+
+# ── Frontend ───────────────────────────────────────────────────────────
+streamlit>=1.32.0
+plotly>=5.20.0

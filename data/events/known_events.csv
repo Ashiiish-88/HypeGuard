@@ -1,0 +1,25 @@
+ticker,start,end,type,source_url,notes
+GME,2021-01-11,2021-01-28,meme_squeeze,https://www.sec.gov/litigation/litreleases/2022/lr25328.htm,GameStop short squeeze Jan 2021 — RVOL peaked 30x+ with retail coordination via Reddit WallStreetBets
+AMC,2021-05-24,2021-06-02,meme_squeeze,https://finra.org/investors/alerts/meme-stocks,AMC meme rally May 2021 — vol spike 20x+ on social media coordination
+GME,2021-03-08,2021-03-12,meme_squeeze,https://markets.businessinsider.com/news/stocks/gamestop-stock-price-surge-short-squeeze-march-2021-2021-3,Second GME squeeze March 2021
+KOSS,2021-01-28,2021-01-29,meme_squeeze,https://www.wsj.com/articles/koss-gamestop-retail-investors-short-squeeze-11611877200,Koss headphones 1000%+ spike alongside GME squeeze
+BB,2021-01-25,2021-01-29,meme_squeeze,https://www.reuters.com/article/us-retail-trading-blackberry/blackberry-shares-surge-in-reddit-driven-rally-idUSKBN29T1Z5,BlackBerry included in WallStreetBets basket
+NOK,2021-01-27,2021-01-29,meme_squeeze,https://www.cnbc.com/2021/01/29/amc-gamestop-blackberry-nokia-express-rally.html,Nokia meme rally Jan 2021
+AMTD,2022-08-02,2022-08-05,anomalous_spike,https://www.bloomberg.com/news/articles/2022-08-04/amtd-digital-surges-21-000-amid-wave-of-retail-day-trading,AMTD Digital +21000% spike with no news — extreme pump case
+GME,2022-06-06,2022-06-09,organic_catalyst,https://www.wsj.com/articles/gamestop-shares-jump-after-ceo-ryan-cohen-tweets-11654467600,Ryan Cohen tweet — legitimate catalyst causing spike
+NVDA,2023-05-24,2023-05-26,organic_catalyst,https://www.cnbc.com/2023/05/24/nvidia-earnings-report.html,NVDA blowout earnings May 2023 — organic vol spike post-earnings
+NVDA,2023-08-23,2023-08-25,organic_catalyst,https://www.cnbc.com/2023/08/23/nvidia-nvda-earnings-q2-2024.html,NVDA Q2 2024 earnings beat — organic catalyst
+AAPL,2023-06-05,2023-06-06,organic_catalyst,https://www.apple.com/newsroom/2023/06/wwdc23/,Apple WWDC Vision Pro announcement — legitimate catalyst
+MULN,2022-09-06,2022-09-12,suspected_manipulation,https://www.sec.gov/news/press-release/2023-77,Mullen Automotive SEC investigation 2022
+BBBY,2022-08-08,2022-08-18,meme_squeeze,https://www.wsj.com/articles/bed-bath-beyond-surges-as-retail-traders-ride-another-short-squeeze-11660083601,BBBY second meme squeeze Aug 2022 — RVOL 15x+
+PROG,2021-10-04,2021-10-08,anomalous_spike,https://seekingalpha.com/article/4456829-progenity-stock-squeeze,PROG unusual activity October 2021
+SNDL,2021-02-10,2021-02-11,meme_squeeze,https://www.cnbc.com/2021/02/10/sundial-growers-hits-all-time-high-as-reddit-traders-push-cannabis-stocks.html,SNDL Reddit pump Feb 2021
+AAPL,2022-01-01,2022-12-31,control_no_event,https://finance.yahoo.com/quote/AAPL/,AAPL quiet 2022 (large-cap control — expect no hype labels)
+MSFT,2022-01-01,2022-12-31,control_no_event,https://finance.yahoo.com/quote/MSFT/,MSFT quiet 2022 control period
+JNJ,2022-01-01,2022-12-31,control_no_event,https://finance.yahoo.com/quote/JNJ/,JNJ quiet 2022 control period
+TSLA,2021-10-25,2021-11-04,organic_catalyst,https://www.reuters.com/business/autos-transportation/hertz-order-100000-teslas-2021-10-25/,Hertz 100K Tesla order — legitimate catalyst for 40%+ run-up
+WKHS,2020-09-02,2020-09-04,suspected_manipulation,https://www.cnbc.com/2020/09/03/workhorse-shares-surge-60percent-on-usps-truck-contract-hopes.html,Workhorse USPS contract speculation — no catalyst
+AMC,2021-11-22,2021-11-23,organic_catalyst,https://www.cnbc.com/2021/11/22/amc-ceo-adam-aron-buys-shares-amc-preferred.html,AMC preferred equity — organic price action
+GME,2023-05-12,2023-05-17,control_no_event,https://finance.yahoo.com/quote/GME/,GME quiet period 2023 — expected ORGANIC label
+NVDA,2022-08-24,2022-08-25,organic_catalyst,https://investor.nvidia.com/news-releases/news-release-details/nvidia-announces-financial-results-second-quarter-fiscal-2023,NVDA earnings Q2 FY2023
+COIN,2021-04-14,2021-04-15,organic_catalyst,https://www.cnbc.com/2021/04/14/coinbase-direct-listing-live-updates.html,Coinbase direct listing on Nasdaq

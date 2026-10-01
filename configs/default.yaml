@@ -1,0 +1,89 @@
+# HypeGuard — Central Configuration
+# All thresholds and hyperparameters live here.
+# Loaded via backend/src/config.py (pydantic-settings).
+# Override any value with an environment variable or .env file.
+
+# ── Data Collection ────────────────────────────────────────────────────
+data:
+  default_lookback_days: 60
+  request_delay_seconds: 1.5
+  max_news_articles: 30
+
+# ── Feature Engineering Thresholds ─────────────────────────────────────
+# Decision T0.2: using Backend.md contract values (2.5 / 2.0)
+# These were previously inconsistent: features.py used 1.8/1.5, docs said 2.5/2.0
+features:
+  volume_lookback_days: 20
+  rvol_spike_threshold: 2.5       # RVOL above this = volume anomaly
+  zscore_spike_threshold: 2.0     # Z-score above this = volume anomaly
+  rsi_period: 14
+  rsi_overbought: 75
+  bollinger_period: 20
+  bollinger_std: 2
+
+# ── Outcome-Based Label Parameters (v2, Section 5 of PRD) ─────────────
+# Sweep range documented in reports/label_sweep.md
+labels:
+  window_days: 30          # T trading days per sample
+  stride_days: 1           # stride for training (5 for quick experiments)
+  run_up_threshold: 0.40   # R_up: close[t] / close[t-10] - 1 >= 0.40
+  rvol_min: 2.0            # RVOL must also be >= 2.0 for run-up to count
+  reversal_depth: 0.25     # D: drawdown from local peak >= 25%
+  reversal_horizon: 10     # H: within next 10 trading days
+  catalyst_window_days: 3  # earnings within ±3 days = catalyst (no hype label)
+  target_positive_rate_min: 0.02   # sweep fails if below 2%
+  target_positive_rate_max: 0.08   # sweep fails if above 8%
+  label_version: "v2_outcome_based"
+
+# ── Model Scoring Thresholds ───────────────────────────────────────────
+# These are derived from calibration (T3.7); defaults shown here.
+# After calibration, overwrite with values from model_card.json.
+scoring:
+  pump_alert_threshold: 86.0   # hype_score >= 86 → PUMP_ALERT / AVOID
+  hype_threshold: 61.0         # hype_score >= 61 → HYPE / WAIT 20%
+  neutral_threshold: 31.0      # hype_score >= 31 → NEUTRAL / WAIT 50%
+  # below 31 → ORGANIC / BUY 100%
+
+# ── Advisor / Investment Logic ─────────────────────────────────────────
+advisor:
+  usd_to_inr: 83.5            # update periodically; T6.6 adds configurable FX
+  disclaimer: "Educational tool only. Not financial advice. Always do your own research."
+  # Deploy percentages per tier
+  pump_alert_deploy_pct: 0
+  hype_deploy_pct: 20
+  neutral_deploy_pct: 50
+  organic_deploy_pct: 100
+  # Wait days per tier
+  pump_alert_wait_days: 7
+  hype_wait_days: 4
+  neutral_wait_days: 2
+  silent_spike_deploy_pct: 30  # institutional / silent spike override
+  silent_spike_wait_days: 3
+
+# ── API ────────────────────────────────────────────────────────────────
+api:
+  version: "2.0.0"
+  allowed_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8501"   # Streamlit default
+  demo_tickers: ["GME", "NVDA", "AMC"]
+
+# ── Deep Learning (Phase 3) ────────────────────────────────────────────
+model:
+  price_window: 30         # T = 30 trading days
+  price_features: 12       # F features per day
+  gru_hidden: 64
+  gru_layers: 2
+  gru_dropout: 0.2
+  text_proj_dim: 64
+  fusion_heads: 4
+  modality_dropout: 0.2    # zero out text branch for 20% of training samples
+  focal_gamma: 2.0
+  lr: 0.001
+  weight_decay: 0.01
+  max_epochs: 100
+  early_stop_patience: 10
+  batch_size: 64
+  seed: 42
+  finbert_model: "ProsusAI/finbert"
+  finbert_frozen: true

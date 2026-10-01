@@ -1,0 +1,20 @@
+# configs/models/price_only.yaml
+# Price-only GRU baseline (T3.2, ablation)
+# Run: python -m ml.train --config configs/models/price_only.yaml
+
+model_type:   price_only
+encoder_type: gru
+
+price_window:    30
+price_features:  12
+gru_hidden:      64
+gru_layers:      2
+gru_dropout:     0.2
+focal_gamma:     2.0
+
+lr:                  0.001
+weight_decay:        0.01
+max_epochs:          100
+early_stop_patience: 10
+batch_size:          64
+seed:                42

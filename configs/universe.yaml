@@ -1,0 +1,74 @@
+# HypeGuard — Ticker Universe
+# Groups: meme, small_penny, mid, large_control, documented_pnd
+# Used by: scripts/ingest_news.py, ml/data/sequence_dataset.py
+
+meme:
+  - GME
+  - AMC
+  - KOSS
+  - BB
+  - NOK
+  - EXPR
+  - BBBY
+  - SNDL
+  - CLOV
+  - WISH
+  - WKHS
+  - NAKD
+  - ATOS
+  - MVIS
+  - TLRY
+  - SPCE
+  - PLTR
+  - SOFI
+  - HOOD
+
+small_penny:
+  - GNUS
+  - IDEX
+  - MINE
+  - OCGN
+  - JAGX
+  - BNGO
+  - SENS
+  - ZOM
+  - CTRM
+  - SHIP
+
+mid:
+  - TSLA
+  - RIVN
+  - LCID
+  - NKLA
+  - COIN
+  - RBLX
+  - ROKU
+  - SNAP
+  - DKNG
+  - OPEN
+
+# Large-cap controls: expected low false-alarm rate
+large_control:
+  - AAPL
+  - MSFT
+  - GOOGL
+  - AMZN
+  - NVDA
+  - META
+  - BRK-B
+  - JPM
+  - JNJ
+  - PG
+  - KO
+  - WMT
+  - XOM
+  - CVX
+  - HD
+
+# Tickers from documented pump-and-dump cases
+# Source: SEC Litigation Releases, public court records
+documented_pnd:
+  - VERB      # 2021 alleged manipulation
+  - MULN      # 2022-23 SEC investigation
+  - AMTD      # 2022 extreme spike (AMTD Digital)
+  - PROG      # 2021 unusual activity

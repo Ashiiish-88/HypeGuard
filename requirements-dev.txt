@@ -1,0 +1,16 @@
+# Install after requirements.txt:
+#   pip install -r requirements-dev.txt
+
+# ── Testing ────────────────────────────────────────────────────────────
+pytest>=8.1.0
+pytest-mock>=3.12.0
+httpx>=0.27.0             # required by FastAPI TestClient
+
+# ── Linting ────────────────────────────────────────────────────────────
+ruff>=0.4.0
+
+# ── Notebooks ──────────────────────────────────────────────────────────
+jupyter>=1.0.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+ipykernel>=6.29.0
